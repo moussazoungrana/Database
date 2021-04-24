@@ -12,11 +12,11 @@ class DB
     /**
      * @var DB
      */
-    private static $instance;
+    private static $instance ;
     /**
      * @var PDO
      */
-    private $pdo;
+    private $pdo ;
 
 
     /**
@@ -24,7 +24,8 @@ class DB
      */
     private function __construct()
     {
-
+        $dns = Config::$driver . ':host=' . Config::$servername . ';dbname=' . Config::$dbname . ';charset=' . Config::$charset;
+        $this->pdo = new PDO($dns, Config::$username, Config::$password, Config::$options);
     }
 
 
@@ -33,10 +34,9 @@ class DB
      */
     public static function getInstance(): DB
     {
-        if (!self::$instance) {
+        if (is_null(self::$instance)) {
             self::$instance = new DB();
         }
-
         return self::$instance;
     }
 
@@ -46,10 +46,6 @@ class DB
      */
     public function getPDO(): PDO
     {
-        $dns = Config::$driver . ':host=' . Config::$servername . ';dbname=' . Config::$dbname . ';charset=' . Config::$charset;
-        if ($this->pdo == null) {
-            $this->pdo = new PDO($dns, Config::$username, Config::$password, Config::$options);
-        }
         return $this->pdo;
     }
 
