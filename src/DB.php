@@ -71,9 +71,9 @@ class DB
      * @param null $fetch_style
      * @return mixed
      */
-    public function queryFetch(string $statement , ? array $option=null , $fetch_style=null){
-        $query = $this->getPDO()->prepare($statement);
-        $query->execute($option);
+    public function queryFetch(string $statement, ?array $option = null, $fetch_style = null)
+    {
+        $query = $this->query($statement, $option, $fetch_style);
         return $query->fetch($fetch_style);
     }
 
@@ -86,8 +86,7 @@ class DB
      */
     public function queryFetchAll(string $statement , ? array $option=null , $fetch_style=null): array
     {
-        $query = $this->getPDO()->prepare($statement);
-        $query->execute($option);
+        $query = $this->query($statement, $option, $fetch_style);
         return $query->fetchAll($fetch_style);
     }
 

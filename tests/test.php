@@ -9,7 +9,6 @@ use moussazoungrana\Database\DB;
 
 $db = DB::getInstance();
 
-
 $db->query(" DROP TABLE user;
 CREATE TABLE user(
     id int(10)
@@ -17,16 +16,10 @@ CREATE TABLE user(
 ");
 
 
-$db->query(" INSERT into  test.user values (?)",[5]);
+$db->query(" INSERT into  user values (?)",[5]);
 
-$result = $db->queryFetch(" SELECT * FROM  user WHERE id=?",[5]);
+$result = $db->queryFetchAll(" SELECT * FROM  user WHERE id=?",[5]);
 
 
-//var_dump($result);
-
-var_dump(DB::getInstance());
-var_dump(DB::getInstance());
-var_dump(DB::getInstance());
-var_dump(DB::getInstance()->getPDO());
-
+ var_dump($result);
 
