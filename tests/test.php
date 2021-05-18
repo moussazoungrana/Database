@@ -18,8 +18,13 @@ CREATE TABLE user(
 
 $db->query(" INSERT into  user values (?)",[5]);
 
-$result = $db->queryFetchAll(" SELECT * FROM  user WHERE id=?",[5]);
+
+$result = $db->queryFetchOne(" SELECT id FROM  user WHERE id=?",[5]);
+
+
 
 
  var_dump($result);
+
+ //echo $result[0]->id;
 

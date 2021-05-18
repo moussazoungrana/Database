@@ -56,7 +56,7 @@ class DB
      * @param array|null $option
      * @return false|PDOStatement
      */
-    public function query(string $statement, ? array $option=null )
+    public function query(string $statement, ?array $option=null )
     {
         $query = $this->getPDO()->prepare($statement);
         $query->execute($option);
@@ -65,26 +65,26 @@ class DB
     }
 
     /**
-     * Perform a database query and fetch result
+     * Perform a database query and fetch One row
      * @param string $statement
      * @param array|null $option
      * @param null $fetch_style
      * @return mixed
      */
-    public function queryFetch(string $statement, ?array $option = null, $fetch_style = null)
+    public function queryFetchOne(string $statement, ?array $option = null, $fetch_style = null)
     {
         $query = $this->query($statement, $option, $fetch_style);
         return $query->fetch($fetch_style);
     }
 
     /**
-     * Perform a database query and fetch result
+     * Perform a database query and fetch all row
      * @param string $statement
      * @param array|null $option
      * @param null $fetch_style
      * @return array
      */
-    public function queryFetchAll(string $statement , ? array $option=null , $fetch_style=null): array
+    public function queryFetchAll(string $statement , ?array $option=null , $fetch_style=null): array
     {
         $query = $this->query($statement, $option, $fetch_style);
         return $query->fetchAll($fetch_style);
