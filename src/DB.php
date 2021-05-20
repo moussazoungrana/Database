@@ -8,7 +8,6 @@ use PDOStatement;
 
 class DB
 {
-
     /**
      * @var DB
      */
@@ -41,14 +40,17 @@ class DB
     }
 
     /**
-     * Get Connection to the database
-     * @return PDO
+     * Perform a database query and fetch One row
+     * @param string $statement
+     * @param array|null $option
+     * @param null $fetch_style
+     * @return mixed
      */
-    public function getPDO(): PDO
+    public function queryFetchOne(string $statement, ?array $option = null, $fetch_style = null)
     {
-        return $this->pdo;
+        $query = $this->query($statement, $option, $fetch_style);
+        return $query->fetch($fetch_style);
     }
-
 
     /**
      * Perform a database query
@@ -65,16 +67,12 @@ class DB
     }
 
     /**
-     * Perform a database query and fetch One row
-     * @param string $statement
-     * @param array|null $option
-     * @param null $fetch_style
-     * @return mixed
+     * Get Connection to the database
+     * @return PDO
      */
-    public function queryFetchOne(string $statement, ?array $option = null, $fetch_style = null)
+    public function getPDO(): PDO
     {
-        $query = $this->query($statement, $option, $fetch_style);
-        return $query->fetch($fetch_style);
+        return $this->pdo;
     }
 
     /**
