@@ -39,17 +39,14 @@ class DB
         return self::$instance;
     }
 
+
     /**
-     * Perform a database query and fetch One row
-     * @param string $statement
-     * @param array|null $option
-     * @param null $fetch_style
-     * @return mixed
+     * Get Connection to the database
+     * @return PDO
      */
-    public function queryFetchOne(string $statement, ?array $option = null, $fetch_style = null)
+    public function getPDO(): PDO
     {
-        $query = $this->query($statement, $option, $fetch_style);
-        return $query->fetch($fetch_style);
+        return $this->pdo;
     }
 
     /**
@@ -66,14 +63,21 @@ class DB
         return $query;
     }
 
+
     /**
-     * Get Connection to the database
-     * @return PDO
+     * Perform a database query and fetch One row
+     * @param string $statement
+     * @param array|null $option
+     * @param null $fetch_style
+     * @return mixed
      */
-    public function getPDO(): PDO
+    public function queryFetchOne(string $statement, ?array $option = null, $fetch_style = null)
     {
-        return $this->pdo;
+        $query = $this->query($statement, $option);
+        return $query->fetch($fetch_style);
     }
+
+
 
     /**
      * Perform a database query and fetch all row
@@ -82,11 +86,35 @@ class DB
      * @param null $fetch_style
      * @return array
      */
-    public function queryFetchAll(string $statement , ?array $option=null , $fetch_style=null): array
+    public function queryFetchAll(string $statement, ?array $option = null, $fetch_style = null): array
     {
-        $query = $this->query($statement, $option, $fetch_style);
+        $query = $this->query($statement, $option);
         return $query->fetchAll($fetch_style);
     }
+
+
+    /**
+     * @param string $table
+     * @param array|string[] $columns
+     * @return array
+     */
+    public function select(string $table, array $columns = ['*'])
+    {
+        $columns = implode(',', $columns);
+        return $this->queryFetchAll("SELECT {$columns} FROM {$table}");
+    }
+
+
+    /**
+     * Truncate table
+     * @param string $table
+     * @return false|PDOStatement
+     */
+    public function truncate(string $table)
+    {
+        return $this->query("DELETE FROM {$table}");
+    }
+
 
 
 }

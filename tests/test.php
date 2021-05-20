@@ -6,25 +6,19 @@ use moussazoungrana\Database\DB;
 
 
 
-
 $db = DB::getInstance();
+//$db->truncate('user');
+/*$db->query("CREATE TABLE user(
+    id INT(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    firstname VARCHAR (255),
+    lastname VARCHAR (255),
+    age INT
+    )");*/
 
-$db->query(" DROP TABLE user;
-CREATE TABLE user(
-    id int(10)
-)
-");
-
-
-$db->query(" INSERT into  user values (?)",[5]);
-
-
-$result = $db->queryFetchOne(" SELECT id FROM  user WHERE id=?",[5]);
-
+/*$db->query(" INSERT INTO user(firstname,lastname,age) VALUES (?,?,?)",['moussa','Zoungrana',10]);
+$db->query(" INSERT INTO user(firstname,lastname,age) VALUES (?,?,?)",['mike','kongo',15]);
+$db->query(" INSERT INTO user(firstname,lastname,age) VALUES (?,?,?)",['kevin','Ilboudo',18]);*/
 
 
-
- var_dump($result);
-
- //echo $result[0]->id;
-
+$query = $db->select('user',['firstname','lastname','age']);
+var_dump($query);
