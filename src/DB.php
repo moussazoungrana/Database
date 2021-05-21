@@ -11,11 +11,11 @@ class DB
     /**
      * @var DB
      */
-    private static $instance ;
+    private static $instance;
     /**
      * @var PDO
      */
-    private $pdo ;
+    private $pdo;
 
 
     /**
@@ -28,6 +28,7 @@ class DB
     }
 
 
+
     /**
      * @return DB
      */
@@ -36,8 +37,10 @@ class DB
         if (is_null(self::$instance)) {
             self::$instance = new DB();
         }
+
         return self::$instance;
     }
+
 
 
     /**
@@ -49,19 +52,22 @@ class DB
         return $this->pdo;
     }
 
+
+
     /**
      * Perform a database query
      * @param string $statement
      * @param array|null $option
      * @return false|PDOStatement
      */
-    public function query(string $statement, ?array $option=null )
+    public function query(string $statement, ?array $option = null)
     {
         $query = $this->getPDO()->prepare($statement);
         $query->execute($option);
 
         return $query;
     }
+
 
 
     /**
@@ -74,6 +80,7 @@ class DB
     public function queryFetchOne(string $statement, ?array $option = null, $fetch_style = null)
     {
         $query = $this->query($statement, $option);
+
         return $query->fetch($fetch_style);
     }
 
@@ -89,8 +96,10 @@ class DB
     public function queryFetchAll(string $statement, ?array $option = null, $fetch_style = null): array
     {
         $query = $this->query($statement, $option);
+
         return $query->fetchAll($fetch_style);
     }
+
 
 
     /**
@@ -98,13 +107,40 @@ class DB
      * @param array|string[] $columns
      * @return array
      */
-    public function select(string $table, array $columns = ['*'])
+    public function select(string $table, array $columns = ['*'], ?string $condition = null)
     {
         $columns = implode(',', $columns);
+
+        if (!is_null($condition)) {
+
+            return $this->queryFetchAll("SELECT {$columns} FROM {$table} WHERE {$condition}");
+        }
+
         return $this->queryFetchAll("SELECT {$columns} FROM {$table}");
     }
 
 
+
+    public function insert(string $table, array $data)
+    {
+
+        $sql = "INSERT INTO {$table}";
+        $columns = "(" . implode(',', array_keys($data)) . ")";
+        $values = " VALUES (:" . implode(',:', array_keys($data)) . ")";
+
+        return $this->query($sql . $columns . $values, $data);
+    }
+
+
+
+    public function delete(string $table, string $condition, ?array $data = null)
+    {
+
+        return $this->query(" DELETE FROM {$table} WHERE {$condition} ", $data);
+    }
+
+
+    
     /**
      * Truncate table
      * @param string $table
@@ -112,9 +148,6 @@ class DB
      */
     public function truncate(string $table)
     {
-        return $this->query("DELETE FROM {$table}");
+        return $this->query("TRUNCATE TABLE {$table}");
     }
-
-
-
 }
