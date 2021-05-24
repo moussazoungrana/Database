@@ -28,7 +28,6 @@ class DB
     }
 
 
-
     /**
      * @return DB
      */
@@ -37,21 +36,8 @@ class DB
         if (is_null(self::$instance)) {
             self::$instance = new DB();
         }
-
         return self::$instance;
     }
-
-
-
-    /**
-     * Get Connection to the database
-     * @return PDO
-     */
-    public function getPDO(): PDO
-    {
-        return $this->pdo;
-    }
-
 
 
     /**
@@ -68,8 +54,6 @@ class DB
         return $query;
     }
 
-
-
     /**
      * Perform a database query and fetch One row
      * @param string $statement
@@ -77,14 +61,11 @@ class DB
      * @param null $fetch_style
      * @return mixed
      */
-    public function queryFetchOne(string $statement, ?array $option = null, $fetch_style = null)
+    public function fetchOne(string $statement, ?array $option = null, $fetch_style = null)
     {
         $query = $this->query($statement, $option);
-
         return $query->fetch($fetch_style);
     }
-
-
 
     /**
      * Perform a database query and fetch all row
@@ -93,18 +74,26 @@ class DB
      * @param null $fetch_style
      * @return array
      */
-    public function queryFetchAll(string $statement, ?array $option = null, $fetch_style = null): array
+    public function fetchAll(string $statement, ?array $option = null, $fetch_style = null): array
     {
         $query = $this->query($statement, $option);
-
         return $query->fetchAll($fetch_style);
     }
 
 
+    /**
+     * Get Connection to the database
+     * @return PDO
+     */
+    public function getPDO(): PDO
+    {
+        return $this->pdo;
+    }
 
     /**
      * @param string $table
      * @param array|string[] $columns
+     * @param string|null $condition
      * @return array
      */
     public function select(string $table, array $columns = ['*'], ?string $condition = null)
@@ -113,17 +102,20 @@ class DB
 
         if (!is_null($condition)) {
 
-            return $this->queryFetchAll("SELECT {$columns} FROM {$table} WHERE {$condition}");
+            return $this->fetchAll("SELECT {$columns} FROM {$table} WHERE {$condition}");
         }
 
-        return $this->queryFetchAll("SELECT {$columns} FROM {$table}");
+        return $this->fetchAll("SELECT {$columns} FROM {$table}");
     }
 
 
-
+    /**
+     * @param string $table
+     * @param array $data
+     * @return false|PDOStatement
+     */
     public function insert(string $table, array $data)
     {
-
         $sql = "INSERT INTO {$table}";
         $columns = "(" . implode(',', array_keys($data)) . ")";
         $values = " VALUES (:" . implode(',:', array_keys($data)) . ")";
@@ -132,15 +124,18 @@ class DB
     }
 
 
-
+    /**
+     * @param string $table
+     * @param string $condition
+     * @param array|null $data
+     * @return false|PDOStatement
+     */
     public function delete(string $table, string $condition, ?array $data = null)
     {
-
         return $this->query(" DELETE FROM {$table} WHERE {$condition} ", $data);
     }
 
 
-    
     /**
      * Truncate table
      * @param string $table
@@ -150,4 +145,21 @@ class DB
     {
         return $this->query("TRUNCATE TABLE {$table}");
     }
+
+
+    /**
+     * @param string $table
+     * @return false|PDOStatement
+     */
+    public function dropTable(string $table)
+    {
+        return $this->query("DROP TABLE {$table}");
+    }
+
+    public function dropDatabase(string $database)
+    {
+        return $this->query(" DROP DATABASE IF EXISTS {$database} ");
+    }
+
+
 }

@@ -8,22 +8,22 @@ use moussazoungrana\Database\DB;
 
 
 $db = DB::getInstance();
-
+//$db->dropDatabase('test');
 $db->truncate('user');
-/*$db->query("CREATE TABLE user(
+$db->query("CREATE TABLE IF NOT EXISTS user(
     id INT(10) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     firstname VARCHAR (255),
     lastname VARCHAR (255),
     age INT
-    )");*/
-/* 
+    )");
+/*
 $db->query(
     " INSERT INTO user(firstname,lastname,age) VALUES (:firstname,:lastname,:age)",
     ['firstname' => 'moussa', 'lastname' => 'Zoungrana', 'age' => 10]
 );
 $db->query(" INSERT INTO user(firstname,lastname,age) VALUES (?,?,?)", ['mike', 'kongo', 15]);
 $db->query(" INSERT INTO user(firstname,lastname,age) VALUES (?,?,?)", ['kevin', 'Ilboudo', 18]);
- */
+*/
 
  $db->insert(
     'user',
@@ -46,6 +46,7 @@ $db->insert(
 
 // $db->delete('user',"id = ?",[1]);
 
-$query = $db->select('user', ['id','firstname', 'lastname', 'age'], "id=1");
+$query = $db->select('user', ['age','id']);
+
 var_dump($query);
 
