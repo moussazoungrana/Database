@@ -48,5 +48,7 @@ $db->insert(
 
 $query = $db->select('user', ['age','id']);
 
-var_dump($query);
+//var_dump($query);
+
+var_dump($db->queryfetchOne("SELECT * FROM user WHERE id= ? ",[1]));
 

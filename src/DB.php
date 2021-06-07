@@ -61,7 +61,7 @@ class DB
      * @param null $fetch_style
      * @return mixed
      */
-    public function fetchOne(string $statement, ?array $option = null, $fetch_style = null)
+    public function queryfetchOne(string $statement, ?array $option = null, $fetch_style = null)
     {
         $query = $this->query($statement, $option);
         return $query->fetch($fetch_style);
@@ -74,7 +74,7 @@ class DB
      * @param null $fetch_style
      * @return array
      */
-    public function fetchAll(string $statement, ?array $option = null, $fetch_style = null): array
+    public function queryfetchAll(string $statement, ?array $option = null, $fetch_style = null): array
     {
         $query = $this->query($statement, $option);
         return $query->fetchAll($fetch_style);
@@ -102,10 +102,10 @@ class DB
 
         if (!is_null($condition)) {
 
-            return $this->fetchAll("SELECT {$columns} FROM {$table} WHERE {$condition}");
+            return $this->queryfetchAll("SELECT {$columns} FROM {$table} WHERE {$condition}");
         }
 
-        return $this->fetchAll("SELECT {$columns} FROM {$table}");
+        return $this->queryfetchAll("SELECT {$columns} FROM {$table}");
     }
 
 
