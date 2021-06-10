@@ -1,4 +1,4 @@
-<?php
+```php 
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -50,3 +50,4 @@ var_dump($query);
 
 //var_dump($db->queryfetchOne("SELECT * FROM user WHERE id= ? ",[1]));
 
+```
