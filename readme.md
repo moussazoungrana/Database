@@ -1,4 +1,17 @@
+
+## Installation
+
+You can install the package via composer:
+
+```bash
+composer require moussazoungrana/database dev-master
+```
+
+## Usage
+
+
 ```php 
+
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -51,3 +64,21 @@ var_dump($query);
 //var_dump($db->queryfetchOne("SELECT * FROM user WHERE id= ? ",[1]));
 
 ```
+
+## QueryBuilder
+
+```php
+
+use moussazoungrana\Database\QueryBuilder;
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+$db = new QueryBuilder();
+
+ $result= $db->select('id,firstname')->from('user')->orderBy('id Desc')->run();
+
+ var_dump($result);
+
+
+```
+
