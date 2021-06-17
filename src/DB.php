@@ -2,7 +2,7 @@
 
 namespace moussazoungrana\Database;
 
-use moussazoungrana\Database\Config\Config;
+//use moussazoungrana\Database\Config\Config;
 use PDO;
 use PDOStatement;
 
@@ -23,8 +23,9 @@ class DB
      */
     private function __construct()
     {
-        $dns = Config::$driver . ':host=' . Config::$servername . ';dbname=' . Config::$dbname . ';charset=' . Config::$charset;
-        $this->pdo = new PDO($dns, Config::$username, Config::$password, Config::$options);
+       // Config::load(dirname(__DIR__).'/../config.php');
+        $dns = Config::get('driver') . ':host=' . Config::get('host') . ';dbname=' . Config::get('dbname') . ';charset=' . Config::get('charset');
+        $this->pdo = new PDO($dns, Config::get('username'), Config::get('password'), $this->getOptions());
     }
 
 
@@ -159,6 +160,15 @@ class DB
     public function dropDatabase(string $database)
     {
         return $this->query(" DROP DATABASE IF EXISTS {$database} ");
+    }
+
+
+    protected function getOptions()
+    {
+        return [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
+        ];
     }
 
 

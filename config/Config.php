@@ -14,7 +14,7 @@ class Config
     /**
      * @var string
      */
-    public static $servername = 'localhost';
+    public static $host = 'localhost';
 
     /**
      * @var string
@@ -44,5 +44,9 @@ class Config
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
     ];
 
+
+
+
+    
 
 }
