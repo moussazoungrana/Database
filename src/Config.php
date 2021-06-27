@@ -12,6 +12,8 @@ class Config{
 
     private static $values ;
 
+    private static $defaultconfigfile= __DIR__.'/../../../config.php';
+
 
 
 
@@ -44,9 +46,13 @@ class Config{
     }
 
 
-    public static function load($values)
+    public static function load($values=null)
     {
+        if(!file_exists($values)){
+          return  include self::$defaultconfigfile;
+        }
         self::$values = $values;
+        return include self::$values;
     }
 
 
