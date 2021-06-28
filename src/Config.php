@@ -22,8 +22,9 @@ class Config
 
     private function __construct(?string $filename = null)
     {
-        $this->register(__DIR__ . '/../../config.php');
+       /* $this->register(__DIR__ . '/../../config.php');
         $this->load();
+        */
     }
 
 
