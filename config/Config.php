@@ -4,7 +4,7 @@ namespace moussazoungrana\Database\Config;
 
 use PDO;
 
-class Config
+class Configg
 {
 
     /**

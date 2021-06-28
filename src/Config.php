@@ -1,72 +1,63 @@
-<?php  
+<?php
 
 namespace moussazoungrana\Database;
 
 
 
-class Config{
+class Config
+{
 
 
 
     private static $instance;
 
-    private static $values ;
+    private $configs;
 
-    private static $defaultconfigfile= __DIR__.'/../../../config.php';
+    private $files;
+
+
 
 
 
 
     private function __construct(?string $filename = null)
     {
-        
+        $this->register(__DIR__ . '/../../config.php');
+        $this->load();
     }
 
 
 
     public static function getInstance()
     {
-        if(is_null(self::$instance)){
+        if (is_null(self::$instance)) {
             self::$instance = new Config();
         }
         return self::$instance;
-
     }
 
 
 
-    public static function get($key , $default = null)
+    public static function get($key, $default = null)
     {
-        if(isset(self::$values[$key])){
-            return self::$values[$key];
-        }
-
-        return $default;
-
+        return static::getInstance()->getConfig($key) ?? $default;
     }
 
 
-    public static function load($values=null)
+    public function register($filename)
     {
-        if(!file_exists($values)){
-          return  include self::$defaultconfigfile;
-        }
-        self::$values = $values;
-        return include self::$values;
+        $this->files = $filename;
+      return  $this->load();
+    }
+
+    protected function load()
+    {
+       return $this->configs[] =  include $this->files;
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public function getConfig(string $key)
+    {
+        return $this->configs[$key];
+    }
 }

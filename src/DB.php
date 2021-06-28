@@ -23,9 +23,9 @@ class DB
      */
     private function __construct()
     {
-       // Config::load(dirname(__DIR__).'/../config.php');
-        $dns = Config::get('driver') . ':host=' . Config::get('host') . ';dbname=' . Config::get('dbname') . ';charset=' . Config::get('charset');
-        $this->pdo = new PDO($dns, Config::get('username'), Config::get('password'), $this->getOptions());
+        $config = Config::getInstance()->register(__DIR__.'/../../../config.php');
+        $dns = $config['driver'] . ':host=' . $config['host'] . ';dbname=' . $config['dbname'] . ';charset=' . $config['charset'];
+        $this->pdo = new PDO($dns, $config['username'], $config['password'], $this->getOptions());
     }
 
 
