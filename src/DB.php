@@ -23,7 +23,7 @@ class DB
      */
     private function __construct()
     {
-        $config = Config::getInstance()->register(__DIR__.'/../../../config.php');
+        $config = Config::get('db');
         $dns = $config['driver'] . ':host=' . $config['host'] . ';dbname=' . $config['dbname'] . ';charset=' . $config['charset'];
         $this->pdo = new PDO($dns, $config['username'], $config['password'], $this->getOptions());
     }

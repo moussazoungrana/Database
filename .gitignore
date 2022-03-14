@@ -2,3 +2,6 @@
 /.idea
 .phpunit.result.cache
 /.vscode
+/app/
+/src/DB__.php
+db.php

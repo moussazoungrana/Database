@@ -19,7 +19,6 @@
 
     "autoload": {
         "psr-4": {
-            "moussazoungrana\\Database\\Config\\": "config/",
             "moussazoungrana\\Database\\": "src/",
             "moussazoungrana\\Database\\Test\\": "tests/"
         }
