@@ -19,8 +19,7 @@
 
     "autoload": {
         "psr-4": {
-            "moussazoungrana\\Database\\": "src/",
-            "moussazoungrana\\Database\\Test\\": "tests/"
+            "moussazoungrana\\Database\\": "src/"
         }
     },
 
