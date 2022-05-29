@@ -1,6 +1,6 @@
 <?php
 
-namespace moussazoungrana\Database\Helpers;
+namespace moz\Database\Helpers;
 
 class Arr
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace moussazoungrana\Database;
+namespace moz\Database;
 
 
 class QueryBuilder
@@ -70,7 +70,6 @@ class QueryBuilder
             $table = implode(',', $this->from);
             $orderBy= implode(',', $this->orderBy);
 
-           //return $sql = "SELECT {$columns} FROM {$table} ORDER BY {$orderBy}";
 
          return  $this->db->queryfetchAll("SELECT {$columns} FROM {$table} ORDER BY {$orderBy}");
 

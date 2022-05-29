@@ -1,8 +1,7 @@
 <?php
 
-namespace moussazoungrana\Database;
+namespace moz\Database;
 
-//use moussazoungrana\Database\Config\Config;
 use PDO;
 use PDOStatement;
 

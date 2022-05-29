@@ -9,18 +9,41 @@ composer require moussazoungrana/database dev-master
 
 ## Usage
 
+First create a config file with your database configuration (IMPORTANT)
+- Example of config file
+```php 
+<?php
+ 
+ return [
+   'driver' => 'mysql',
+    'dbname' => 'database',
+    'host' => 'localhost',
+    "username" => "root",
+    "password" => "",
+    'charset' => 'utf8'
+ ];
+```
+
+- Then Register your composer autoloader
+```php
+   <?php
+   // After registered your composer autoloader (e.g: require_one __DIR_."/../vendor/autoload.php"
+   // Register your config files
+   \moz\Database\Config::instance()->register(__DIR__.'/../db.php');
+   
+```
 
 ```php 
 
-
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use moussazoungrana\Database\DB;
+\moz\Database\Config::getInstance()->register('../db.php');
 
 
 
 
-$db = DB::getInstance();
+
+$db = \moz\Database\DB::getInstance();
 //$db->dropDatabase('test');
 $db->truncate('user');
 $db->query("CREATE TABLE IF NOT EXISTS user(
@@ -69,7 +92,7 @@ var_dump($query);
 
 ```php
 
-use moussazoungrana\Database\QueryBuilder;
+use moz\Database\QueryBuilder;
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 

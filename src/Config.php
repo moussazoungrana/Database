@@ -1,11 +1,11 @@
 <?php
 
-namespace moussazoungrana\Database;
+namespace moz\Database;
 
 
 
 use Composer\Autoload\ClassLoader;
-use moussazoungrana\Database\Helpers\Arr;
+use moz\Database\Helpers\Arr;
 
 class Config
 {
@@ -19,13 +19,14 @@ class Config
 
     private function __construct(?string $filename = null)
     {
-        if(is_null($filename)){
+      /*  if(is_null($filename)){
             $reflection = new \ReflectionClass(ClassLoader::class);
             $root = dirname($reflection->getFileName(), 2);
             $filename = realpath($root . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . "db.php");
         }
         $this->register($filename);
         $this->load();
+      */
     }
 
 
