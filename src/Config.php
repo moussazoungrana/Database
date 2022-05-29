@@ -3,7 +3,6 @@
 namespace moz\Database;
 
 
-
 use Composer\Autoload\ClassLoader;
 use moz\Database\Helpers\Arr;
 
