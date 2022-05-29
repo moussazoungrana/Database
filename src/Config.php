@@ -16,16 +16,16 @@ class Config
     protected array $files = [];
 
 
-    private function __construct(?string $filename = null)
+    private function __construct()
     {
-      /*  if(is_null($filename)){
-            $reflection = new \ReflectionClass(ClassLoader::class);
-            $root = dirname($reflection->getFileName(), 2);
-            $filename = realpath($root . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . "db.php");
+        $reflection = new \ReflectionClass(ClassLoader::class);
+        $root = dirname($reflection->getFileName(), 2);
+        $filename = realpath($root . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . "db.php");
+        if (file_exists($filename)){
+            $this->register($filename);
+            $this->load();
         }
-        $this->register($filename);
-        $this->load();
-      */
+
     }
 
 
@@ -44,7 +44,7 @@ class Config
     }
 
 
-    public function register(?string $filename)
+    public function register(string $filename)
     {
         if (is_dir($filename)) {
             $this->files = array_merge($this->getFiles(), glob($filename . '**/*.php'));

@@ -9,8 +9,8 @@ composer require moussazoungrana/database
 
 ## Usage
 
-First create a config file with your database configuration (IMPORTANT)
-- Example of config file
+First create a config file with your database configuration in **Application root Folder (IMPORTANT)
+- Example of config file (db.php)
 ```php 
 <?php
  
@@ -23,6 +23,8 @@ First create a config file with your database configuration (IMPORTANT)
     'charset' => 'utf8'
  ];
 ```
+- This package can auto wire your config file(db.php) in application root folder, else you need to register this!  
+
 
 - Then Register your composer autoloader
 ```php
