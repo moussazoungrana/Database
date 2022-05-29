@@ -32,6 +32,7 @@ First create a config file with your database configuration (IMPORTANT)
    \moz\Database\Config::instance()->register(__DIR__.'/../db.php');
    
 ```
+- Usage example
 
 ```php 
 
