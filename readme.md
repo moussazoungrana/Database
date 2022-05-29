@@ -4,7 +4,7 @@
 You can install the package via composer:
 
 ```bash
-composer require moussazoungrana/database dev-master
+composer require moussazoungrana/database
 ```
 
 ## Usage
