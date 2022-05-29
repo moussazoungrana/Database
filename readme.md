@@ -103,6 +103,5 @@ $db = new QueryBuilder();
 
  var_dump($result);
 
-
 ```
 
